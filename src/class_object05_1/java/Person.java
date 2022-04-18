@@ -1,5 +1,7 @@
 package class_object05_1.java;
 
+import java.util.Objects;
+
 public class Person{
     String name;
     int age;
@@ -14,6 +16,7 @@ public class Person{
     }
     public Person(String name,int age){
         this();
+        this.name=name;
         this.age=age;
     }
 
@@ -29,5 +32,21 @@ public class Person{
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age && id == person.id && Objects.equals(name, person.name);
+    }//系统默认生成的equals（）
 
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
+    }
 }

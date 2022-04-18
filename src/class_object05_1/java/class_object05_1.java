@@ -115,6 +115,149 @@ public class class_object05_1 {
 //        p3.study();//无法调用子类特有的方法
         //编译看左，运行看右
 
+        //如何才能调用子类特有的属性和方法:向下转型（向上转型就是多态）
+        /*
+        使用强制类型转换符
+         */
+        Student s3=(Student) p3;
+        //使用强转时，可能出现ClassCastException异常
+
+        //操作符instanceof
+        /*
+        a instanceof A:判断对象a是否是类A的实例，是返回true，不是返回false（间接父类也返回true）
+        使用情景：使用向下转型前进行判断，返回true就进行向下转型，反之则不
+         */
+        if(s3 instanceof Student){
+            System.out.println("是对应类的实例");
+        }
+
+
+
+        //Object类的使用
+        /*
+        Object 类是所有 Java类的根父类
+        如果在类的声明中未使用 extends关键字指明其父类.则默认父类为java lang Object类
+
+        Object类的功能具有通用性
+
+
+         */
+        /*
+        ==运算符：
+            可以使用在基本数据类型和引用数据类型变量中
+            基本数据类型中比较的是值是否相等（数据类型可以不同）（布尔型无法比较）
+            引用数据类型比较的是是否指向同一个对象（指向同一块地址）
+        equals（）：
+            是方法而不是运算符
+            所以只适用于引用数据类型
+            Object中equal是（）中的定义：
+                public boolean equals(Object obj){
+                    return (this==obj);
+                }
+                Object类中的equals（）和==相同，都是比较两个地址值相同
+            像String,Date,File,包装类都重写了equals（）方法，重写后不再比较引用的地址值，而是比较两个对象的实体内容（重写的规则）
+            通常情况下，自定义类中的equals()方法也想比较实体内容是否相等，则需要对equals（）方法进行重写
+
+
+
+
+
+         */ //equals()方法
+
+
+        //toString()方法
+        /*
+        当输出一个对象的引用时，实际上是调用当前对象的toString（）
+        定义：
+            public String toString() {
+                return getClass().getName() + "@" + Integer.toHexString(hashCode());
+            }
+        String,Date,File,包装类都重写了toString()方法，使得调用时返回实体内容信息
+
+
+
+
+
+         */
+        System.out.println("toString()方法");
+        Person s4=new Person("tom",18);
+        System.out.println(s4.toString());//class_object05_1.java.Person@1b6d3586  重写后：Person{name='tom', age=18, id=0}
+        System.out.println(s4);           //class_object05_1.java.Person@1b6d3586
+        String str1=new String("aaa");
+        System.out.println(str1);        //aaa
+
+
+
+        /*单元测试
+        1 选择当前工程，右键选择：build path -add libraries-JUnit 4-下一步
+        2 创建java类，进行单元测试
+            此时java类要求：公共类，有公共的无参构造器
+        3 此类中声明单元测试方法
+            方法的权限是public，没有返回值，没有形参
+        4 此单元测试方法上需要声明注解：@Test  ，并在类中导入：import org.junit.Test
+        5 声明好测试方法后，就可以测试相关代码
+        6 左键双击单元测试方法名，右键：run as - JUnit Test
+            红条：异常
+            绿条：正常
+
+
+        */   //单元测试
+
+
+        System.out.println("包装类");
+        //包装类
+        /*
+        java提供八种包装类型，是的基本数据类型具有类的特征
+
+        基本类型、包装类与String 类间的转换
+        基本数据类型<->包装类
+            1.通过构造器：Integer t = new Integer(11);
+            2.通过字符串参数：Float f = new Float("32.1F");
+            3.自动装箱
+            拆箱
+            1.调用包装类的方法：xxxValue()
+            2.自动拆箱
+            JDK1.5 之后，支持自动装箱，自动拆箱。但类型必须匹配。
+        基本数据类型，包装类<->String类型
+            1 连接运算
+            2 调用String重载的valueOf（XXX xxx）
+            1 调用包装类的parseXxx(string s)
+
+
+
+
+
+         */
+        Integer i1=new Integer(123);//基本数据类型>包装类
+        System.out.println(i1.toString());
+        int in1=i1.intValue();//包装类->基本数据类型
+        Integer i2=new Integer("123");
+        System.out.println(i2.toString());
+        //自动装箱：将基本数据类型当类 当形参传入类
+
+        int i3=i2;//自动拆箱
+
+
+        //boolean
+        Boolean b1=new Boolean(true);
+        System.out.println(b1.toString());
+        Boolean b2=new Boolean("true");
+        System.out.println(b2.toString());
+        Boolean b3=new Boolean("true123");//ctrl+Alt+鼠标左键
+        System.out.println(b3.toString());//false
+
+
+        float f1=12.3f;
+        String string2=f1+"";
+        String string1=String.valueOf(f1);//基本（包装类可开箱）->string
+        Float num1=Float.parseFloat(string2);//基本<-string
+        System.out.println(num1);//12.3
+
+
+
+
+
+
 
 
 
@@ -122,9 +265,12 @@ public class class_object05_1 {
 
 
     }
+    public void test() {
 
+    }
 
 
 }
+
 
 
